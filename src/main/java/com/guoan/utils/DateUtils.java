@@ -14,13 +14,15 @@ public class DateUtils {
     public static String getDate(String arg){
 
         SimpleDateFormat simpleSdf = new SimpleDateFormat("yyyy-MM-dd");
+        int i = 1;
         try{
-            arg = (arg == null || arg == "null" ) ? "1" : arg;
+            arg = (arg == null || arg == "null" || arg == "" ) ? "1" : arg;
+            i = Integer.parseInt(arg);
         }catch (Exception e){
-            arg = "1";
+            i = 1;
             e.printStackTrace();
         }finally {
-            String yesterday = simpleSdf.format(  new Date(new Date().getTime()-(24*60*60*1000)*Integer.parseInt(arg)));
+            String yesterday = simpleSdf.format(  new Date(new Date().getTime()-(24*60*60*1000)*i));
             return yesterday;
         }
     }
