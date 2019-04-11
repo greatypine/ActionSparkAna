@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import com.guoan.utils.DateUtils;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
@@ -109,9 +110,14 @@ public class Wx_log_es_two {
 		 final Broadcast<Map<Object, Object>> broadcastCM = jsc.broadcast(c_mMap);
 		 final Broadcast<Map<Object, Object>> broadcastCidPhone = jsc.broadcast(cid_customer);
 		 
-		 SimpleDateFormat simpleSdf = new SimpleDateFormat("yyyy-MM-dd");
-		 String yesterday = simpleSdf.format(  new Date(new Date().getTime()-24*60*60*1000));
-		 
+		 //SimpleDateFormat simpleSdf = new SimpleDateFormat("yyyy-MM-dd");
+		 //String yesterday = simpleSdf.format(  new Date(new Date().getTime()-24*60*60*1000));
+		String yesterday = "";
+		if(args.length >1){
+			yesterday = DateUtils.getDate(args[1]);
+		}else{
+			yesterday = DateUtils.getDate(null);
+		}
 		 
 		 StringBuffer query = new StringBuffer();
 		  query.append("{"+

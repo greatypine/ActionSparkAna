@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import com.guoan.utils.DateUtils;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
@@ -78,9 +79,15 @@ public class Search_log_es {
 
 		 JavaSparkContext jsc = new JavaSparkContext(spark.sparkContext());
 		 jsc.setLogLevel("INFO");
-		 SimpleDateFormat yesterdataySdf = new SimpleDateFormat("yyyy-MM-dd");
-		 String yesterday = yesterdataySdf.format(  new Date(new Date().getTime()-24*60*60*1000));
-		 
+		 //SimpleDateFormat yesterdataySdf = new SimpleDateFormat("yyyy-MM-dd");
+		 //String yesterday = yesterdataySdf.format(  new Date(new Date().getTime()-24*60*60*1000));
+		String yesterday = "";
+		if(args.length >1){
+			yesterday = DateUtils.getDate(args[1]);
+		}else{
+			yesterday = DateUtils.getDate(null);
+		}
+
 		 SimpleDateFormat dateSdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		 final Broadcast<SimpleDateFormat> broadcast_sdf = jsc.broadcast(dateSdf);
 		 

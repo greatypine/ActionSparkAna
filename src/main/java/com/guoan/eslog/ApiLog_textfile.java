@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
+import com.guoan.utils.DateUtils;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -53,9 +54,15 @@ public class ApiLog_textfile {
 				}
 			}
 		}
-		SimpleDateFormat simpleSdf = new SimpleDateFormat("yyyy-MM-dd");
+		//SimpleDateFormat simpleSdf = new SimpleDateFormat("yyyy-MM-dd");
 		
-		String yesterday = simpleSdf.format(  new Date(new Date().getTime()-24*60*60*1000));
+		//String yesterday = simpleSdf.format(  new Date(new Date().getTime()-24*60*60*1000));
+		String yesterday = "";
+		if(args.length >1){
+			yesterday = DateUtils.getDate(args[1]);
+		}else{
+			yesterday = DateUtils.getDate(null);
+		}
 		//获取数据
 		Api_log_saveTextfile.saveApiFile2Hdfs(yesterday);
 		

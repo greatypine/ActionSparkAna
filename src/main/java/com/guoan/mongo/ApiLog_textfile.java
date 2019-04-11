@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
+import com.guoan.utils.DateUtils;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -53,9 +54,14 @@ public class ApiLog_textfile {
         // 未找到
         conf.set("spark.reducer.maxMblnFlight", "1024m");
         
-        SimpleDateFormat simpleSdf = new SimpleDateFormat("yyyy-MM-dd");
-		String yesterday = simpleSdf.format(  new Date(new Date().getTime()-24*60*60*1000));
-		 
+        //SimpleDateFormat simpleSdf = new SimpleDateFormat("yyyy-MM-dd");
+		//String yesterday = simpleSdf.format(  new Date(new Date().getTime()-24*60*60*1000));
+		String yesterday = "";
+		if(args.length >0){
+			yesterday = DateUtils.getDate(args[0]);
+		}else{
+			yesterday = DateUtils.getDate(null);
+		}
 		 
 		 //获取数据
 		ReadMongo2File.rm2f("C:\\Users\\Administrator\\Desktop\\api.log"  , "createDate", yesterday);
