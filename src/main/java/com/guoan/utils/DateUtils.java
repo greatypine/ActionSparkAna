@@ -12,16 +12,17 @@ public class DateUtils {
      * @return
      */
     public static String getDate(String arg){
-
         SimpleDateFormat simpleSdf = new SimpleDateFormat("yyyy-MM-dd");
+        int diffdate = 1;
         try{
             arg = (arg == null || arg == "null" ) ? "1" : arg;
+            diffdate = Integer.parseInt(arg);
         }catch (Exception e){
-            arg = "1";
+        	diffdate = 1;
             e.printStackTrace();
-        }finally {
-            String yesterday = simpleSdf.format(  new Date(new Date().getTime()-(24*60*60*1000)*Integer.parseInt(arg)));
-            return yesterday;
         }
+        String yesterday = simpleSdf.format(new Date(new Date().getTime()-(24*60*60*1000)*diffdate));
+        return yesterday;
+    
     }
 }
