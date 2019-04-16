@@ -28,7 +28,8 @@ public class ImpalaPoolUtils  implements Serializable{
 	private static String JDBC_DRIVER_NAME = "com.cloudera.impala.jdbc41.Driver";
 //    private static String CONNECTION_URL = "jdbc:impala://124.93.28.145:17776/datacube;auth=noSasl";
 	//北京
-    private static String CONNECTION_URL = "jdbc:impala://10.10.40.11:21051/gemini";
+    //private static String CONNECTION_URL = "jdbc:impala://10.10.40.11:21051/gemini";
+    private static String CONNECTION_URL = "jdbc:impala://10.10.40.3:21050/gemini";
 //    private static String CONNECTION_URL = "jdbc:impala://10.0.6.21:21050/gemini";
     // 定义数据库的链接
     private static Connection connection;
